@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class Component {
     // 간단 텍스트
     private String simpleText;

@@ -2,11 +2,13 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 
 @Getter
 @Builder
+@ToString
 public class ContextValue {
     // 수정하려는 output 컨텍스트의 이름
     private String name;

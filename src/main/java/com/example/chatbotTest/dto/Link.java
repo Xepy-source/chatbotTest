@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class Link {
     // 링크 우선순위
     // pc: pc < web

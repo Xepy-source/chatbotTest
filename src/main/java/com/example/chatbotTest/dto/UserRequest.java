@@ -1,8 +1,10 @@
 package com.example.chatbotTest.dto;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class UserRequest {
     // 사용자의 시간대를 반환합니다.한국에서 보낸 요청이라면 “Asia/Seoul”를 갖습니다.
     private String timezone;

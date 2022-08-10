@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class SimpleImage {
 
     // 전달하고자 하는 이미지의 url입니다

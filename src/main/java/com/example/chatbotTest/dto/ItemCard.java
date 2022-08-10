@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class ItemCard {
     // 상단 이미지입니다.
     // 단일형: 이미지 비율 2:1 (800*400), 1:1 (800*800)사용 가능

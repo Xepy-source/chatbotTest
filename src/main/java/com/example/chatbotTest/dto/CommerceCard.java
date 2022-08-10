@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class CommerceCard {
     // 제품에 대한 상세 설명입니다.
     private String description;

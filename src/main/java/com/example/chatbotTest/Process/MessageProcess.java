@@ -2,6 +2,7 @@ package com.example.chatbotTest.Process;
 
 import com.example.chatbotTest.dto.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,26 +15,22 @@ public class MessageProcess {
         Intent intent = dto.getIntent();
         Action action = dto.getAction();
         UserRequest userRequest = dto.getUserRequest();
-        System.out.println("-------------------message process------------------");
-        System.out.println();
-//        Context context = dto.getContexts();
 
         ResponseDto responseDto;
         if (userRequest != null) {
             String utterance = userRequest.getUtterance();
             QuickReply[] quickReplies;
-            Component component;
-            Component[] components;
             SkillTemplate skillTemplate;
             Button[] buttons;
+            ArrayList<Map<String, Object>> outputs = new ArrayList<>();
+            Map<String, Object> outputMap = new HashMap<>();
             switch (utterance) {
                 case "테스트":
-                    component = Component.builder()
-                            .simpleText("간단한 텍스트 요소입니다.")
-                            .build();
-                    components = new Component[] {component};
+                    System.out.println("테스트 case");
+                    outputMap.put("simpleText", "간단한 텍스트 요소입니다.");
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -41,16 +38,15 @@ public class MessageProcess {
                             .build();
                     break;
                 case "보물상자":
+                    System.out.println("보물상자 case");
                     SimpleImage simpleImage = SimpleImage.builder()
                             .imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMu9biGYhNqEFFQlOqxMhlFcw7OKGfGqNo-g&usqp=CAU")
                             .altText("보물상자 이미지")
                             .build();
-                    component = Component.builder()
-                            .simpleImage(simpleImage)
-                            .build();
-                    components = new Component[] {component};
+                    outputMap.put("simpleImage", simpleImage);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -58,6 +54,7 @@ public class MessageProcess {
                             .build();
                     break;
                 case "보물상자 카드":
+                    System.out.println("보물상자 카드 case");
                     Button button1 = Button.builder()
                             .action("message")
                             .label("열어보기")
@@ -78,12 +75,10 @@ public class MessageProcess {
                             .thumbnail(Thumbnail.builder().imageUrl("https://previews.123rf.com/images/takoyaki999/takoyaki9991308/takoyaki999130800113/21719442-%EB%B3%B4%EB%AC%BC-%EC%83%81%EC%9E%90.jpg").build())
                             .buttons(buttons)
                             .build();
-                    component = Component.builder()
-                            .basicCard(basicCard)
-                            .build();
-                    components = new Component[] {component};
+                    outputMap.put("basicCard", basicCard);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -91,6 +86,7 @@ public class MessageProcess {
                             .build();
                     break;
                 case "커머스 카드":
+                    System.out.println("커머스 카드 case");
                     Button buyButton = Button.builder()
                             .label("구매하기")
                             .action("webLink")
@@ -126,12 +122,10 @@ public class MessageProcess {
                             .buttons(buttons)
                             .build();
 
-                    component = Component.builder()
-                            .commerceCard(commerceCard)
-                            .build();
-                    components = new Component[] {component};
+                    outputMap.put("commerceCard", commerceCard);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -139,6 +133,7 @@ public class MessageProcess {
                             .build();
                     break;
                 case "리스트 카드":
+                    System.out.println("리스트 카드 case");
                     Map<String, Object> buttonMap = new HashMap<>();
                     buttonMap.put("key1", "value1");
                     buttonMap.put("key2", "value2");
@@ -181,12 +176,11 @@ public class MessageProcess {
                             .items(items)
                             .buttons(buttons)
                             .build();
-                    component = Component.builder()
-                            .listCard(listCard)
-                            .build();
-                    components = new Component[] {component};
+
+                    outputMap.put("listCard", listCard);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -194,6 +188,7 @@ public class MessageProcess {
                             .build();
                     break;
                 case "비행기 표":
+                    System.out.println("비행기 표 case");
                     ItemList[] itemLists = new ItemList[5];
                     itemLists[0] = ItemList.builder().title("Flight").description("KE0605").build();
                     itemLists[1] = ItemList.builder().title("Boards").description("8:50 AM").build();
@@ -215,19 +210,19 @@ public class MessageProcess {
                             .buttons(buttons)
                             .buttonLayout("vertical")
                             .build();
-                    component = Component.builder()
-                            .itemCard(itemCard)
-                            .build();
-                    components = new Component[] {component};
+
+                    outputMap.put("itemCard", itemCard);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
                             .template(skillTemplate)
                             .build();
                     break;
-                case "커피 메뉴 알려줘":
+                case "커피 메뉴":
+                    System.out.println("커피 메뉴 case");
                     Button[] buttons1 = new Button[1];
                     buttons1[0] = Button.builder().action("message").label("한 개 담기").messageText("장바구니에 담았습니다.").build();
                     BasicCard[] basicCarouselItems = new BasicCard[3];
@@ -256,19 +251,18 @@ public class MessageProcess {
                             .items(basicCarouselItems)
                             .build();
 
-                    component = Component.builder()
-                            .basicCardCarousel(basicCardCarousel)
-                            .build();
-                    components = new Component[] {component};
+                    outputMap.put("basicCardCarousel", basicCardCarousel);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
                             .template(skillTemplate)
                             .build();
                     break;
-                case "카페 전체메뉴 알려줘":
+                case "카페 전체메뉴":
+                    System.out.println("카페 전체메뉴 case");
                     ListCard[] listCarouselItems = new ListCard[2];
 
                     ListItem[] carouselInnerItems1 = new ListItem[4];
@@ -311,12 +305,10 @@ public class MessageProcess {
                             .quickReplies(quickReplies)
                             .build();
 
-                    component = Component.builder()
-                            .listCardCarousel(listCardCarousel)
-                            .build();
-                    components = new Component[] {component};
+                    outputMap.put("listCardCarousel", listCardCarousel);
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -324,12 +316,11 @@ public class MessageProcess {
                             .build();
                     break;
                 default:
-                    component = Component.builder()
-                            .simpleText("이해 할 수 없습니다. \n다시 말씀해 주세요.")
-                            .build();
-                    components = new Component[] {component};
+                    System.out.println("default case");
+                    outputMap.put("simpleText", "이해 할 수 없습니다. \n다시 말씀해 주세요.");
+                    outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
-                            .outputs(components)
+                            .outputs(outputs)
                             .build();
                     responseDto = ResponseDto.builder()
                             .version(kakaoApiVersion)
@@ -337,6 +328,9 @@ public class MessageProcess {
                             .build();
                     break;
             }
+
+            System.out.println("----------------ResponseJSON----------------");
+            System.out.println(responseDto.toString());
         } else {
             responseDto = null;
         }

@@ -2,11 +2,13 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 
 @Getter
 @Builder
+@ToString
 public class ListItem {
     // header에 들어가는 경우, listCard의 제목이 됩니다.
     // items에 들어가는 경우, 해당 항목의 제목이 됩니다.

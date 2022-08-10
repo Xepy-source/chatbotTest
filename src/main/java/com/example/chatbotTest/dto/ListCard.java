@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
-@Builder 
+@Builder
+@ToString 
 public class ListCard {
     // 카드의 상단 항목
     private ListItem header;

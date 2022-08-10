@@ -2,11 +2,13 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 
 @Getter
 @Builder
+@ToString
 public class Button {
     // 버튼에 적히는 문구
     private String label;

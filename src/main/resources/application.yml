@@ -12,9 +12,12 @@ spring:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.30.1.54:3306/chatbotTest?serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://172.30.1.65:3306/chatbotTest?serverTimezone=Asia/Seoul
+#    username: chatbot
+#    password: nara1234
+    url: jdbc:mysql://172.31.42.210:3306/chatbotTest?serverTimezone=Asia/Seoul
     username: chatbot
-    password: nara1234
+    password: nara123
   jpa:
     open-in-view: true
     hibernate:

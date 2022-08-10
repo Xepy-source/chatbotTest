@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class QuickReply {
     // 사용자에게 노출 될 바로가기 응답의 표시
     private String label;

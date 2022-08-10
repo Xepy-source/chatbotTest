@@ -2,9 +2,11 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
+@ToString
 public class ItemListSummary {
     // 아이템리스트 전체에 대한 제목 정보입니다.
     private String title;

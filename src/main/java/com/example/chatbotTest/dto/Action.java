@@ -2,11 +2,13 @@ package com.example.chatbotTest.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.Map;
 
 @Getter
 @Builder
+@ToString
 public class Action {
     // 스킬의 고유한 식별자입니다.
     private String id;
