@@ -37,6 +37,35 @@ public class MessageProcess {
                             .template(skillTemplate)
                             .build();
                     break;
+                case "빠른 대답":
+                    System.out.println("빠른대답 case");
+                    outputMap.put("simpleText", "Quick Reply 요소입니다.");
+                    outputs.add(outputMap);
+                    QuickReply[] quickReplies1 = new QuickReply[3];
+                    quickReplies1[0] = QuickReply.builder()
+                            .messageText("테스트")
+                            .action("message")
+                            .label("테스트1")
+                            .build();
+                    quickReplies1[1] = QuickReply.builder()
+                            .messageText("비행기 표")
+                            .action("message")
+                            .label("비행기 표1")
+                            .build();
+                    quickReplies1[2] = QuickReply.builder()
+                            .messageText("커머스 카드")
+                            .action("message")
+                            .label("커머스 카드1")
+                            .build();
+                    skillTemplate = SkillTemplate.builder()
+                            .outputs(outputs)
+                            .quickReplies(quickReplies1)
+                            .build();
+                    responseDto = ResponseDto.builder()
+                            .version(kakaoApiVersion)
+                            .template(skillTemplate)
+                            .build();
+                    break;
                 case "보물상자":
                     System.out.println("보물상자 case");
                     SimpleImage simpleImage = SimpleImage.builder()
@@ -223,35 +252,41 @@ public class MessageProcess {
                     break;
                 case "커피 메뉴":
                     System.out.println("커피 메뉴 case");
-                    Button[] buttons1 = new Button[1];
-                    buttons1[0] = Button.builder().action("message").label("한 개 담기").messageText("장바구니에 담았습니다.").build();
-                    BasicCard[] basicCarouselItems = new BasicCard[3];
-                    basicCarouselItems[0] = BasicCard.builder()
+                    BasicCard[] basicCards = new BasicCard[3];
+                    buttons = new Button[1];
+                    buttons[0] = Button.builder()
+                            .action("message")
+                            .label("한 개 담기")
+                            .messageText("음료수를 담았습니다.")
+                            .build();
+
+                    basicCards[0] = BasicCard.builder()
                             .title("아메리카노")
                             .description("1,800원")
                             .thumbnail(Thumbnail.builder().imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzrt9ZhO7zJKW7Ynk42YGKjdGuwFa6omeMJA&usqp=CAU").build())
-                            .buttons(buttons1)
+                            .buttons(buttons)
                             .build();
-                    basicCarouselItems[1] = BasicCard.builder()
+
+                    basicCards[1] = BasicCard.builder()
                             .title("카페라떼")
                             .description("2,000원")
                             .thumbnail(Thumbnail.builder().imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn3UEEVr1nuDi6YrKfHCFeYcmJBDotLHj0dw&usqp=CAU").build())
-                            .buttons(buttons1)
+                            .buttons(buttons)
                             .build();
-                    basicCarouselItems[2] = BasicCard.builder()
+
+                    basicCards[2] = BasicCard.builder()
                             .title("카페모카")
                             .description("2,500원")
                             .thumbnail(Thumbnail.builder().imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRDdtG9Y24afUcMu_WrGiWBcwcGDwLkF1THA&usqp=CAU").build())
-                            .buttons(buttons1)
+                            .buttons(buttons)
                             .build();
 
-                    BasicCardCarousel basicCardCarousel = BasicCardCarousel.builder()
-                            .type("listCard")
-                            .header(CarouselHeader.builder().title("케로셀 헤더").thumbnail(Thumbnail.builder().imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM").build()).build())
-                            .items(basicCarouselItems)
+                    Carousel basicCarousel = Carousel.builder()
+                            .type("basicCard")
+                            .items(basicCards)
                             .build();
 
-                    outputMap.put("basicCardCarousel", basicCardCarousel);
+                    outputMap.put("carousel", basicCarousel);
                     outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
                             .outputs(outputs)
@@ -263,49 +298,89 @@ public class MessageProcess {
                     break;
                 case "카페 전체메뉴":
                     System.out.println("카페 전체메뉴 case");
-                    ListCard[] listCarouselItems = new ListCard[2];
 
-                    ListItem[] carouselInnerItems1 = new ListItem[4];
-                    carouselInnerItems1[0] = ListItem.builder().title("햄치즈").description("4,500원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_01.jpg").build();
-                    carouselInnerItems1[1] = ListItem.builder().title("베이컨 아보카도").description("5,500원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_02.jpg").build();
-                    carouselInnerItems1[2] = ListItem.builder().title("에그 포테이토").description("5,300원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_03.jpg").build();
-                    carouselInnerItems1[3] = ListItem.builder().title("갈릭 베이컨 토마토").description("5,800원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_04.jpg").build();
-
-                    ListItem[] carouselInnerItems2 = new ListItem[4];
-                    carouselInnerItems2[0] = ListItem.builder().title("아메리카노").description("1,800원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_05.jpg").build();
-                    carouselInnerItems2[1] = ListItem.builder().title("카페라떼").description("2,000원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_06.jpg").build();
-                    carouselInnerItems2[2] = ListItem.builder().title("카페모카").description("2,500원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_07.jpg").build();
-                    carouselInnerItems2[3] = ListItem.builder().title("돌체라떼").description("2,500원").imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_08.jpg").build();
-
-                    Button[] carouselInnerButton1 = new Button[1];
-                    carouselInnerButton1[0] = Button.builder().label("더보기").action("message").messageText("샌드위치 더 보기").build();
-
-                    Button[] carouselInnerButton2 = new Button[1];
-                    carouselInnerButton2[0] = Button.builder().label("더보기").action("message").messageText("커피 더 보기").build();
-
-                    quickReplies = new QuickReply[3];
-                    quickReplies[0] = QuickReply.builder().messageText("인기 메뉴").action("message").label("인기 메뉴").build();
-                    quickReplies[1] = QuickReply.builder().messageText("최근 주문").action("message").label("최근 주문").build();
-                    quickReplies[2] = QuickReply.builder().messageText("장바구니").action("message").label("장바구니").build();
-
-                    listCarouselItems[0] = ListCard.builder()
-                            .header(ListItem.builder().title("샌드위치").build())
-                            .items(carouselInnerItems1)
-                            .buttons(carouselInnerButton1)
+                    buttons = new Button[1];
+                    Button viewButton1 = Button.builder()
+                            .label("더 보기")
+                            .action("message")
+                            .messageText("메뉴 더 보기")
                             .build();
-                    listCarouselItems[1] = ListCard.builder()
-                            .header(ListItem.builder().title("커피").build())
-                            .items(carouselInnerItems2)
-                            .buttons(carouselInnerButton2)
+                    buttons[0] = viewButton1;
+
+                    ListItem[] items1 = new ListItem[4];
+                    ListItem item1_1 = ListItem.builder()
+                            .title("햄치즈")
+                            .description("4,500원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_01.jpg")
                             .build();
-                    ListCardCarousel listCardCarousel = ListCardCarousel.builder()
+                    ListItem item1_2 = ListItem.builder()
+                            .title("베이컨 아보카도")
+                            .description("5,500원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_02.jpg")
+                            .build();
+                    ListItem item1_3 = ListItem.builder()
+                            .title("에그 포테이토")
+                            .description("5,300원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_03.jpg")
+                            .build();
+                    ListItem item1_4 = ListItem.builder()
+                            .title("갈릭 베이컨 토마토")
+                            .description("5,800원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_04.jpg")
+                            .build();
+                    items1[0] = item1_1;
+                    items1[1] = item1_2;
+                    items1[2] = item1_3;
+                    items1[3] = item1_4;
+
+                    ListCard listCard1 = ListCard.builder()
+                            .header(Head.builder().title("샌드위치").build())
+                            .items(items1)
+                            .buttons(buttons)
+                            .build();
+
+                    ListItem[] items2 = new ListItem[4];
+                    ListItem item2_1 = ListItem.builder()
+                            .title("아메리카노")
+                            .description("1,800원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_05.jpg")
+                            .build();
+                    ListItem item2_2 = ListItem.builder()
+                            .title("카페라떼")
+                            .description("2,000원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_06.jpg")
+                            .build();
+                    ListItem item2_3 = ListItem.builder()
+                            .title("카페모카")
+                            .description("2,500원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_07.jpg")
+                            .build();
+                    ListItem item2_4 = ListItem.builder()
+                            .title("돌체라떼")
+                            .description("2,500원")
+                            .imageUrl("https://t1.kakaocdn.net/openbuilder/docs_image/02_img_08.jpg")
+                            .build();
+                    items2[0] = item2_1;
+                    items2[1] = item2_2;
+                    items2[2] = item2_3;
+                    items2[3] = item2_4;
+
+                    ListCard listCard2 = ListCard.builder()
+                            .header(Head.builder().title("커피").build())
+                            .items(items2)
+                            .buttons(buttons)
+                            .build();
+
+                    ListCard[] listCards = new ListCard[2];
+                    listCards[0] = listCard1;
+                    listCards[1] = listCard2;
+
+                    Carousel listCarousel = Carousel.builder()
                             .type("listCard")
-                            .header(CarouselHeader.builder().title("케로셀 헤더").thumbnail(Thumbnail.builder().imageUrl("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4BJ9LU4Ikr_EvZLmijfcjzQKMRCJ2bO3A8SVKNuQ78zu2KOqM").build()).build())
-                            .items(listCarouselItems)
-                            .quickReplies(quickReplies)
+                            .items(listCards)
                             .build();
 
-                    outputMap.put("listCardCarousel", listCardCarousel);
+                    outputMap.put("carousel", listCarousel);
                     outputs.add(outputMap);
                     skillTemplate = SkillTemplate.builder()
                             .outputs(outputs)

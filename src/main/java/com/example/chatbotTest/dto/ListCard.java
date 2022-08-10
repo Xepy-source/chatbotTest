@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString 
 public class ListCard {
     // 카드의 상단 항목
-    private ListItem header;
+    private Object header;
     
     // 카드의 각각 아이템 최대 5개
     private ListItem[] items;
